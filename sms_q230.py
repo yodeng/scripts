@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #coding:utf-8
 # 统计所给序列文件(fasta或fastq)的序列条数和长度(均值+标准差),总的碱基个数等等信息。
+# fsdjkkfsjkldfjk
 
 import datetime,sys,os
 
