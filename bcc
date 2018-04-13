@@ -1,0 +1,10 @@
+#!/bin/bash
+## bc计算器,"+-*/^%"
+###
+#set -o noglob
+if [ $# -gt 1 ];then
+    a=`echo $* | tr -d " "`
+    echo "scale=12;$a"|bc
+    exit 0
+fi
+echo "scale=12;0+$1" |bc

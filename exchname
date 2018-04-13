@@ -1,0 +1,13 @@
+#!/bin/bash
+## 
+## exchange the two file name
+if [ $# -ne 2 ];then
+echo USAGE: exchname existpath1 existpath2
+exit -1
+fi
+
+tmp=${1}.tmp
+mv $1 $tmp
+mv $2 $1
+mv $tmp $2
+

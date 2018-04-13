@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+## $1为gtf文件，$2为string下载的detail数据库文件，$3为tax_id，输出文件为pro_pro_interaction.db
+if [ $# -ne 3 ];then
+	echo "make_prodb gtf_file STRING_dbfile Tax_id"
+	exit 0
+fi
+
+outdir=`dirname $2`
+awk -F " " '{print $1"\t"$2"\t"$NF}' $2 > $outdir/pre.interaction.tab.txt
+#cut -d " " -f 1,2,10 $2 --output-delimiter='	' > $outdir/pre.interaction.tab.txt
+extract_gene2protein.py $1 $outdir/gene_protein.txt
+pep_interaction.pl -gp $outdir/gene_protein.txt -inter $outdir/pre.interaction.tab.txt -tax $3 -od $outdir >  $outdir/pep.out 2> $outdir/pep.err
+del_rep_pep_interaction.pl -pp $outdir/pro_pro_interaction.db -od $outdir > $outdir/del.repeat.out 2> $outdir/del.repeat.err
